@@ -1,5 +1,6 @@
 """Github and data handler module."""
 import re
+from typing import Any, Dict, List
 
 import requests
 
@@ -24,13 +25,24 @@ def yes_no_to_bool(value: str) -> bool:
     Returns:
         bool: Converted value.
     """
-    value = value.strip().lower()
-    if "yes" in value:
-        return True
-    elif "no" in value:
+    return value.strip().lower() == "yes"
+
+
+def is_yes_no(value: Any) -> bool:
+    """Determine if value is yes/no.
+
+    Args:
+        value (Any): Value to check.
+
+    Returns:
+        bool: Value is yes/no.
+    """
+    if isinstance(value, str) is False:
         return False
-    else:
-        return None
+
+    lowered = value.lower().strip()
+
+    return bool(lowered == "yes" or lowered == "no")
 
 
 def get_raw_public_apis() -> str:
@@ -44,14 +56,14 @@ def get_raw_public_apis() -> str:
     return text
 
 
-def parse_rows(raw_text: str) -> list:
+def parse_rows(raw_text: str) -> List[Dict[str, Any]]:
     """Parse rows from raw text.
 
     Args:
         raw_text (str): Raw text to parse.
 
     Returns:
-        list: List of parsed rows.
+        List[Dict[str, Any]]: List of parsed rows.
     """
     # Iterate over all of the headers for each of the sections
     # and then get all lines that are within a table under that
@@ -85,24 +97,15 @@ def parse_rows(raw_text: str) -> list:
                 auth_method = "oauth"
             elif "apikey" in auth_method or "api key" in auth_method:
                 auth_method = "apikey"
+            elif is_yes_no(auth_method):
+                auth_method = yes_no_to_bool(auth_method)
             else:
-                _auth_method = yes_no_to_bool(auth_method)
-                if _auth_method is not None:
-                    auth_method = _auth_method
+                auth_method = auth_method.strip().lower()
 
             # Determine if HTTPS is supported
-            https = parts[3].strip().lower()
-            if "yes" in https:
-                https = True
-            else:
-                https = False
-
+            https = yes_no_to_bool(parts[3].strip().lower())
             # Determine if CORS is supported
-            cors = parts[4].strip().lower()
-            if "yes" in cors:
-                cors = True
-            else:
-                cors = False
+            cors = yes_no_to_bool(parts[4].strip().lower())
 
             # Add the API to the list of APIs
             apis.append(
