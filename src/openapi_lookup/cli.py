@@ -1,22 +1,25 @@
 """CLI module."""
 import argparse
+from typing import Any, Dict, List
 
-from openapi_lookup import verbosity_levels, setup_logger
+from openapi_lookup import setup_logger, verbosity_levels
 from openapi_lookup.openapis import get_raw_public_apis, parse_rows
 
 
 logger = setup_logger()
 
 
-def filter_apis(apis: list, args: argparse.Namespace) -> list:
+def filter_apis(
+    apis: List[Dict[str, Any]], args: argparse.Namespace
+) -> List[Dict[str, Any]]:
     """Filter APIs.
 
     Args:
-        apis (list): List of APIs to filter.
+        apis (List[Dict[str, Any]]): List of APIs to filter.
         args (argparse.Namespace): Arguments to filter by.
 
     Returns:
-        list: Filtered list of APIs.
+        List[Dict[str, Any]]: Filtered list of APIs.
     """
     if args.all is True:
         return apis
@@ -40,59 +43,57 @@ def filter_apis(apis: list, args: argparse.Namespace) -> list:
     return apis
 
 
-def print_apis(apis: list, args: argparse.Namespace) -> None:
+def print_apis(
+    apis: List[Any],
+    list_all: bool,
+    list_categories: bool,
+    list_auth_methods: bool,
+    list_https: bool,
+    list_cors: bool,
+) -> None:
     """Print APIs.
 
     Args:
-        apis (list): List of APIs to print.
-        args (argparse.Namespace): Arguments to filter by.
+        apis (List[Any]): List of APIs to print.
+        list_all (bool): Show all results.
+        list_categories (bool): Show categories in results.
+        list_auth_methods (bool): Show authentication methods in results.
+        list_https (bool): Show HTTPS support values in results.
+        list_cors (bool): Show CORS support values in results.
     """
-    if any(
-        [
-            args.list_categories,
-            args.list_auth_methods,
-            args.list_https,
-            args.list_cors,
-        ]
-    ):
-        if args.list_categories is True:
+    if list_all:
+        for api in apis:
+            print(
+                f"{api['name']} - {api['description']}\n"
+                f"  Auth Method: {api['auth_method']}\n"
+                f"  HTTPS: {api['https']}\n"
+                f"  CORS: {api['cors']}\n"
+                f"  Link: {api['link']}\n"
+            )
+    else:
+        if list_categories:
             print("Categories:")
-            categories = sorted(list(set([api["category"] for api in apis])))
-            for category in categories:
-                print(f"  {category}")
-            print()
+            categories = sorted(list({api["category"] for api in apis}))
+            print("  " + "\n  ".join(categories))
 
-        if args.list_auth_methods is True:
+        if list_auth_methods:
             print("Authentication Methods:")
             auth_methods = sorted(
-                list(set([str(api["auth_method"]) for api in apis]))
+                list({str(api["auth_method"]) for api in apis})
             )
-            for auth_method in auth_methods:
-                print(f"  {auth_method}")
-            print()
+            print("  " + "\n  ".join(auth_methods))
 
-        if args.list_https is True:
+        if list_https:
             print("HTTPS Support:")
-            https = sorted(list(set([str(api["https"]) for api in apis])))
-            for https in https:
-                print(f"  {https}")
-            print()
+            https = sorted(list({str(api["https"]) for api in apis}))
+            print("  " + "\n  ".join(https))
 
-        if args.list_cors is True:
+        if list_cors:
             print("CORS Support:")
-            cors = sorted(list(set([str(api["cors"]) for api in apis])))
-            for cors in cors:
-                print(f"  {cors}")
-            print()
+            cors = sorted(list({str(api["cors"]) for api in apis}))
+            print("  " + "\n  ".join(cors))
 
-    else:
-        for api in apis:
-            print(f"{api['name']} - {api['description']}")
-            print(f"  Auth Method: {api['auth_method']}")
-            print(f"  HTTPS: {api['https']}")
-            print(f"  CORS: {api['cors']}")
-            print(f"  Link: {api['link']}")
-            print()
+    print()
 
 
 def cli() -> None:
@@ -181,7 +182,14 @@ def cli() -> None:
     raw_text = get_raw_public_apis()
     apis = parse_rows(raw_text)
     apis = filter_apis(apis, args)
-    print_apis(apis, args)
+    print_apis(
+        apis,
+        list_all=args.all,
+        list_categories=args.list_categories,
+        list_auth_methods=args.list_auth_methods,
+        list_https=args.list_https,
+        list_cors=args.list_cors,
+    )
 
 
 if __name__ == "__main__":
