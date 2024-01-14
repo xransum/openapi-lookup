@@ -62,15 +62,11 @@ detailed description.
 [poetry]: https://python-poetry.org/
 [constraints file]: https://pip.pypa.io/en/stable/user_guide/#constraints-files
 [file an issue]: https://github.com/xransum/openapi-lookup/issues
-[keyword-only parameter]:
-    https://docs.python.org/3/glossary.html#keyword-only-parameter
-[nox.sessions.session.install]:
-    https://nox.thea.codes/en/stable/config.html#nox.sessions.Session.install
-[nox.sessions.session.run]:
-    https://nox.thea.codes/en/stable/config.html#nox.sessions.Session.run
+[keyword-only parameter]: https://docs.python.org/3/glossary.html#keyword-only-parameter
+[nox.sessions.session.install]: https://nox.thea.codes/en/stable/config.html#nox.sessions.Session.install
+[nox.sessions.session.run]: https://nox.thea.codes/en/stable/config.html#nox.sessions.Session.run
 [pip install]: https://pip.pypa.io/en/stable/reference/pip_install/
 [pip]: https://pip.pypa.io/
 [pipx]: https://pipxproject.github.io/pipx/
 [license]: https://github.com/xransum/openapi-lookup/blob/main/LICENSE
-[contributor guide]:
-    https://github.com/xransum/openapi-lookup/blob/main/CONTRIBUTING.md
+[contributor guide]: https://github.com/xransum/openapi-lookup/blob/main/CONTRIBUTING.md

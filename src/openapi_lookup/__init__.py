@@ -1,7 +1,7 @@
 """Open API Lookup package."""
+import logging
 import os
 from pathlib import Path
-import logging
 
 
 app_name = "openapi_lookup"

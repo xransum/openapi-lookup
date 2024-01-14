@@ -1,9 +1,8 @@
 # Contributor Guide
 
-Thank you for your interest in improving this project.
-This project is open-source under the [MIT license] and
-welcomes contributions in the form of bug reports,
-feature requests, and pull requests.
+Thank you for your interest in improving this project. This project is
+open-source under the [MIT license] and welcomes contributions in the form of
+bug reports, feature requests, and pull requests.
 
 Here is a list of important resources for contributors:
 
@@ -24,8 +23,8 @@ When filing an issue, make sure to answer these questions:
 - What did you expect to see?
 - What did you see instead?
 
-The best way to get your bug fixed is to provide a test case,
-and/or steps to reproduce the issue.
+The best way to get your bug fixed is to provide a test case, and/or steps to
+reproduce the issue.
 
 ## How to Request a Feature
 
@@ -58,8 +57,8 @@ Install [pyenv] to manage your Python versions:
 curl https://pyenv.run | bash
 ```
 
-Add the following [pyenv] environment variables your following
-lines to your `~/.bashrc`:
+Add the following [pyenv] environment variables your following lines to your
+`~/.bashrc`:
 
 ```bash
 # Pyenv environment variables
@@ -103,27 +102,25 @@ Install the Python package and all it's dependency requirements:
 $ poetry install
 ```
 
-> **Troubleshooting:** If you're using a GUI-based OS
-> and you run commands like `poetry install`, `poetry upgrade`,
-> or `poetry lock` and it's just loading forever at
-> `Resolving dependencies...`, then add the flag `-vvv` to the
-> command to see what's going on. If you see something where
-> it's hanging on `keyring backends`.
+> **Troubleshooting:** If you're using a GUI-based OS and you run commands like
+> `poetry install`, `poetry upgrade`, or `poetry lock` and it's just loading
+> forever at `Resolving dependencies...`, then add the flag `-vvv` to the
+> command to see what's going on. If you see something where it's hanging on
+> `keyring backends`.
 >
-> This is because the keyring package is trying to access
-> your system's keyring, but it prompts a GUI popup for
-> user credentials, but since you're not using the GUI,
-> it hangs forever.
+> This is because the keyring package is trying to access your system's keyring,
+> but it prompts a GUI popup for user credentials, but since you're not using
+> the GUI, it hangs forever.
 >
-> However, to fix it either prepend this to every
-> command you use or append it to your `~/.bashrc`:
+> However, to fix it either prepend this to every command you use or append it
+> to your `~/.bashrc`:
 >
 > ```bash
 > export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 > ```
 
-You should now be able to drop into a [Python IDLE] shell within
-the Poetry virtual environment using the following command:
+You should now be able to drop into a [Python IDLE] shell within the Poetry
+virtual environment using the following command:
 
 ```bash
 poetry run python
@@ -146,8 +143,8 @@ Or you can call [Nox] and run the `nox` sessions:
 poetry run nox
 ```
 
-Jump down to [How to Test the Project] for
-more information on how to run the `nox` sessions.
+Jump down to [How to Test the Project] for more information on how to run the
+`nox` sessions.
 
 ## How to Test the Project
 
@@ -155,10 +152,10 @@ To test anything and everything within the project, we use [Nox]. Nox is a
 Python automation toolkit that helps in automating tests, linting, code
 formatting, security checks, code coverage, and so on.
 
-> **Important:** Only use `nox` through the `poetry run nox` command, this
-> will ensure that the `nox` command is using the correct Python version
-> and the correct virtual environment, as this is what all of the Git
-> actions use to test pull requests and commits.
+> **Important:** Only use `nox` through the `poetry run nox` command, this will
+> ensure that the `nox` command is using the correct Python version and the
+> correct virtual environment, as this is what all of the Git actions use to
+> test pull requests and commits.
 
 To run the `nox` sessions, you can run the following command:
 
@@ -166,10 +163,10 @@ To run the `nox` sessions, you can run the following command:
 poetry run nox
 ```
 
-Before ever pushing any changes to the project, you need to ensure all
-nox sessions are passing without any errors or warnings, this is because
-the Git actions will run the `nox` sessions to ensure that the project
-is fully CI/CD compliant.
+Before ever pushing any changes to the project, you need to ensure all nox
+sessions are passing without any errors or warnings, this is because the Git
+actions will run the `nox` sessions to ensure that the project is fully CI/CD
+compliant.
 
 If you want to run a specific session, you can run the following command:
 
@@ -179,18 +176,18 @@ poetry run nox --session=<session_name>
 poetry run nox -s <session_name>
 ```
 
-> **Important:** Do **not** change the `noxfile.py` file so that your code
-> will pass the tests, the `noxfile.py` file is configured to run the tests
-> on specific Python versions to ensure that the project is compatible with
-> all the Python versions that are defined in the `noxfile.py` file.
+> **Important:** Do **not** change the `noxfile.py` file so that your code will
+> pass the tests, the `noxfile.py` file is configured to run the tests on
+> specific Python versions to ensure that the project is compatible with all the
+> Python versions that are defined in the `noxfile.py` file.
 
 ## Understanding Nox Sessions
 
-If you have a general understanding of how nox sessions work, you can
-jump to [Linting and Code Formatting].
+If you have a general understanding of how nox sessions work, you can jump to
+[Linting and Code Formatting].
 
-When you run the `nox` command, it will run the `default` session,
-which is defined in the `noxfile.py` file as the following:
+When you run the `nox` command, it will run the `default` session, which is
+defined in the `noxfile.py` file as the following:
 
 ```python
 nox.options.sessions = (
@@ -198,8 +195,8 @@ nox.options.sessions = (
 )
 ```
 
-You can view all of the available nox sessions defined by running the
-following command:
+You can view all of the available nox sessions defined by running the following
+command:
 
 ```bash
 poetry run nox --list-sessions
@@ -207,12 +204,12 @@ poetry run nox --list-sessions
 poetry run nox -l
 ```
 
-It may seem like a long list, but it's not that bad. The sessions are
-grouped by the Python version(s) that they are running on.
+It may seem like a long list, but it's not that bad. The sessions are grouped by
+the Python version(s) that they are running on.
 
-Let me provide an example, let's create a session function named
-`do_a_thing` within the `noxfile.py` file that has a session name
-`do-a-thing` and utilizes Python versions `3.8` and `3.11`:
+Let me provide an example, let's create a session function named `do_a_thing`
+within the `noxfile.py` file that has a session name `do-a-thing` and utilizes
+Python versions `3.8` and `3.11`:
 
 ```python
 @nox.session(name="do-a-thing", python=["3.11", "3.8"])
@@ -221,8 +218,8 @@ def do_a_thing(session):
     ...
 ```
 
-Even though we added a session function, it will not show up in the list
-of sessions, this is because we have not added it to the `nox.options.sessions`
+Even though we added a session function, it will not show up in the list of
+sessions, this is because we have not added it to the `nox.options.sessions`
 tuple, so let's add it:
 
 ```python
@@ -254,8 +251,8 @@ poetry run nox --session=do-a-thing
 ```
 
 This will create 4 sessions, each session going by the namencalature of
-`<session_name>-<python_version>` and in the order in which we defined
-the Python versions in the decorator, for example:
+`<session_name>-<python_version>` and in the order in which we defined the
+Python versions in the decorator, for example:
 
 ```bash
 * do-thing-3.11 -> Do a thing.
@@ -264,8 +261,8 @@ the Python versions in the decorator, for example:
 * do-thing-3.10 -> Do a thing.
 ```
 
-If we were to call the session by just it's name `do-thing`, it will run
-all 4 sessions, for example:
+If we were to call the session by just it's name `do-thing`, it will run all 4
+sessions, for example:
 
 ```bash
 poetry run nox --session=do-thing
@@ -310,8 +307,8 @@ poetry run nox --session=tests
 poetry run nox -s tests
 ```
 
-If you want to run a test quickly without running the full test suite,
-you can specify the Python version, for example:
+If you want to run a test quickly without running the full test suite, you can
+specify the Python version, for example:
 
 ```bash
 poetry run nox --session=tests --python=3.11
@@ -336,8 +333,8 @@ for example:
 poetry run pytest tests/test_example.py
 ```
 
-> **Note:** Using pytest directly won't provide fully accurate results and doesn't
-> provide a coverage report.
+> **Note:** Using pytest directly won't provide fully accurate results and
+> doesn't provide a coverage report.
 
 ## Code Coverage
 
@@ -359,7 +356,8 @@ poetry run nox --session=docs-build
 poetry run nox -s docs-build
 ```
 
-You can actually view the documentation locally by running the following command:
+You can actually view the documentation locally by running the following
+command:
 
 ```bash
 poetry run nox --session=docs
@@ -373,8 +371,9 @@ for you to view, however if it doesn't you can view it `http://127.0.0.1:8000`.
 ## How to Submit Changes
 
 > **Requirement:** Before pushing any changes, you must ensure that all sessions
-> pass and you've run `poetry run nox -s pre-commit`, see
-> [How to Test the Project].
+> pass and you've run `poetry run nox -s pre-commit`, see [How to Test the >
+>
+> > Project].
 
 Create a branch for your changes:
 
@@ -382,8 +381,8 @@ Create a branch for your changes:
 $ git switch --create my-changes main
 ```
 
-Make a series of small, single-purpose commits, try to avoid using `git add .` or
-`git add [-a|--all]`:
+Make a series of small, single-purpose commits, try to avoid using `git add .`
+or `git add [-a|--all]`:
 
 ```bash
 $ git add <path-to-file>
@@ -412,11 +411,10 @@ Your pull request needs to meet the following guidelines for acceptance:
 
 Feel free to submit early, though—we can always iterate on this.
 
-> **Important:**<br>
-> Before pushing any changes, you need to **run the pre-commit Nox session**
-> and ensure [How to Test the Project] is followed,
-> so that this will ensure your changes are properly linted and code
-> formatting checks.
+> **Important:**<br> Before pushing any changes, you need to **run the
+> pre-commit Nox session** and ensure [How to Test the Project] is followed, so
+> that this will ensure your changes are properly linted and code formatting
+> checks.
 
 ## Post-Merge Cleanup
 
@@ -427,7 +425,8 @@ $ git switch main
 $ git branch --delete my-changes
 ```
 
-If the branch was merged but not deleted automatically, you can delete it manually:
+If the branch was merged but not deleted automatically, you can delete it
+manually:
 
 ```bash
 $ git push origin --delete my-changes
@@ -437,10 +436,10 @@ $ git push origin --delete my-changes
 
 ### Poetry Issues
 
-**Problem:** Sometimes you may have issues with Poetry and it's virtual environment where any
-changes to the package or environment are not being reflected, this can sometimes
-happen when changing major configs. I've found a complete nuke nuke of it's
-cache and environments works:
+**Problem:** Sometimes you may have issues with Poetry and it's virtual
+environment where any changes to the package or environment are not being
+reflected, this can sometimes happen when changing major configs. I've found a
+complete nuke nuke of it's cache and environments works:
 
 ```bash
 rm -rf ~/.cache/pypoetry
@@ -474,8 +473,9 @@ $ poetry lock
 
 **Problem:** Poetry is hanging forever when resolving dependencies.
 
-**Reason:** This can happen when your OS has a GUI, but you're not using it, so when Poetry
-tries to access the keyring, prompting for credentials, it hangs forever.
+**Reason:** This can happen when your OS has a GUI, but you're not using it, so
+when Poetry tries to access the keyring, prompting for credentials, it hangs
+forever.
 
 **Error:**
 
@@ -501,9 +501,9 @@ export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 **Problem:** Poetry is complaining about an invalid group in the Poetry config.
 
 **Reason:** This can happen when you're using a newer version of Poetry and
-you're using an older version of the config file. Newer versions of Poetry
-have changed the config file structure to use groups like `tool.poetry.group.<group>.<key>`,
-but older versions of Poetry don't.
+you're using an older version of the config file. Newer versions of Poetry have
+changed the config file structure to use groups like
+`tool.poetry.group.<group>.<key>`, but older versions of Poetry don't.
 
 **Error:**
 
@@ -536,9 +536,9 @@ Move/change the key to:
 the virtual environment is not changing or being used, even though you're
 running the `nox` command through Poetry.
 
-**Reason:** How this happens isn't entirely known, however it's a huge pain point
-when changes aren't being reflected in the Nox sessions and clearing the cache
-doesn't work.
+**Reason:** How this happens isn't entirely known, however it's a huge pain
+point when changes aren't being reflected in the Nox sessions and clearing the
+cache doesn't work.
 
 **Solution:** You can try to run the following command to clear the entire Nox
 cache:

@@ -1,5 +1,6 @@
 """Config file for pytest."""
 import os
+
 import pytest
 
 
