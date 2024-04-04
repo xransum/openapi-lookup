@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openapi-lookup"
-version = "0.1.0"
+version = "0.1.1"
 description = "A command-line interface to for the open api listings from public-apis/public-apis."
 authors = ["xransum <xransum@users.noreply.github.com>"]
 license = "MIT"
@@ -32,6 +32,7 @@ types-requests = "^2.31.0"
 appdirs = "^1.4.4"
 
 [tool.poetry.dev-dependencies]
+bandit = ">1.7.6"
 pytest = ">=6.2.5"
 coverage = { extras = ["toml"], version = ">=6.3" }
 safety = ">=1.10.3"
