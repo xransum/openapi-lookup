@@ -1,4 +1,5 @@
 """Github and data handler module."""
+
 import re
 from typing import Any, Dict, List
 

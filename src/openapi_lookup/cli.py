@@ -1,4 +1,5 @@
 """CLI module."""
+
 import argparse
 from typing import Any, Dict, List
 

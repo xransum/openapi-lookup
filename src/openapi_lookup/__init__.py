@@ -1,4 +1,5 @@
 """Open API Lookup package."""
+
 import logging
 import os
 from pathlib import Path
