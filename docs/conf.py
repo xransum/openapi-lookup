@@ -1,4 +1,5 @@
 """Sphinx configuration."""
+
 project = "openapi-lookup"
 author = "xransum"
 copyright = f"2024, {author}"
